@@ -1,0 +1,228 @@
+package customermanager;
+
+import java.io.Serializable;
+
+public class Customer implements Serializable{
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+private int customer_ID;
+private String customer_Name;
+private String customer_Gender;
+private int customer_Age;
+Customer left,right;
+
+public int getCustomer_ID() {
+	return customer_ID;
+}
+public void setCustomer_ID(int customer_ID) {
+	this.customer_ID = customer_ID;
+}
+public String getCustomer_Name() {
+	return customer_Name;
+}
+public void setCustomer_Name(String customer_Name) {
+	this.customer_Name = customer_Name;
+}
+public String getCustomer_Gender() {
+	return customer_Gender;
+}
+public void setCustomer_Gender(String customer_Gender) {
+	this.customer_Gender = customer_Gender;
+}
+public int getCustomer_Age() {
+	return customer_Age;
+}
+public void setCustomer_Age(int customer_Age) {
+	this.customer_Age = customer_Age;
+}
+public Customer(int customer_ID, String customer_Name, String customer_Gender, int customer_Age) {
+	super();
+	this.customer_ID = customer_ID;
+	this.customer_Name = customer_Name;
+	this.customer_Gender = customer_Gender;
+	this.customer_Age = customer_Age;
+}
+public Customer(int customer_ID) {
+	super();
+	this.customer_ID = customer_ID;
+}
+@Override
+public String toString() {
+	return "Customer [customer_ID=" + customer_ID + ", customer_Name=" + customer_Name + ", customer_Gender="
+			+ customer_Gender + ", customer_Age=" + customer_Age + "]";
+}
+}
+package customermanager;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import binarysearchtree.Node;
+
+public class Main {
+	static ArrayList<Customer> malelist = new ArrayList<>();
+	static ArrayList<Customer> femalelist = new ArrayList<>();
+	public static boolean Save_to_file_arraylist(ArrayList<Customer> list, String path) {
+        try {
+            FileOutputStream fos = new FileOutputStream(path);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(list);
+            oos.close();
+            fos.close();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    @SuppressWarnings("unchecked")
+    public static boolean Save_to_file(Customer list, String path) {
+        try {
+            FileOutputStream fos = new FileOutputStream(path);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(list);
+            oos.close();
+            fos.close();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    @SuppressWarnings("unchecked")
+	public static Customer Read_from_file(String path) {
+        
+        Customer s=null;
+		try {
+            FileInputStream fis = new FileInputStream(path);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            Object o = ois.readObject();
+            s = (Customer) o;
+            ois.close();
+            fis.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return s;
+    }
+public static ArrayList<Customer> Read_from_file_arraylist(String path) {
+        
+        ArrayList<Customer> s=null;
+		try {
+            FileInputStream fis = new FileInputStream(path);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            Object o = ois.readObject();
+            s = (ArrayList<Customer>) o;
+            ois.close();
+            fis.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return s;
+    }
+	
+	public static void getMaleList(Customer root){
+		if (root!=null) {
+			getMaleList(root.left);
+			if (root.getCustomer_Gender().compareTo("nam")==0) malelist.add(root);
+			getMaleList(root.right);
+		}
+	}
+	public static void getFemaleList(Customer root){
+		if (root!=null) {
+			getFemaleList(root.left);
+			if (root.getCustomer_Gender().compareTo("nu")==0) femalelist.add(root);
+			getFemaleList(root.right);
+		}
+	}
+	public static Customer addCustomer(Customer root,Customer e) {
+		if  (root==null) return e;
+		if (e.getCustomer_ID()<root.getCustomer_ID()) {
+			if (root.left==null) root.left = e;
+			else root.left = addCustomer(root.left,e);
+		}
+		else {
+			if (root.right==null) root.right = e;
+			else root.right = addCustomer(root.right,e);
+		}
+return root;
+	}
+	public static void readtree(Customer root) {
+		if (root!=null) {
+			readtree(root.left);
+			System.out.println();
+			System.out.printf("%-10d%-25s%-10s%-10d",root.getCustomer_ID(),root.getCustomer_Name(),root.getCustomer_Gender(),root.getCustomer_Age());
+			readtree(root.right);
+		}
+	}
+	public static Customer findCustomer(Customer root,int ID) {
+		if (root==null) return null;
+		if (ID==root.getCustomer_ID()) return root;
+		else if (ID<root.getCustomer_ID()) return findCustomer(root.left,ID);
+		else return findCustomer(root.right,ID);
+ 	}
+	
+	public static Customer deleteCustomer(Customer root, int ID) {
+		if (root==null) return null;
+		if (root.getCustomer_ID()==ID) {
+			if (root.left==null) return root.right;
+			if (root.right==null) return root.left;
+			Customer T = theleftCustomer(root.right);
+			Customer L = root.left;
+			Customer R = deleteCustomer(root.right,T.getCustomer_ID());
+			T.left = L;
+			T.right = R;
+			return T;
+		}
+		if (ID<root.getCustomer_ID()) root.left = deleteCustomer(root.left,ID);
+		else root.right = deleteCustomer(root.right,ID);
+		return root;
+	}
+	public static Customer theleftCustomer(Customer root) {
+		if (root==null) return null;
+		if (root.left==null) return root;
+		else return theleftCustomer(root.left);
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+//	Customer c1 = new Customer(105,"Nguyen Van Nam","nam",23);
+//	Customer c2 = new Customer(106,"Pham Le Huy","nam",28);
+//	Customer c3 = new Customer(108,"Le Van An","nam",23);
+//	Customer c4 = new Customer(103,"Duong Ngoc Nhu Y","nu",21);
+//	Customer c5 = new Customer(102,"Tran Van Dat","nam",20);
+//	Customer c6 = new Customer(109,"Le Thi Mai","nu",27);	
+//	root = addCustomer(root,c2);root = addCustomer(root,c3);root = addCustomer(root,c4);
+//	root = addCustomer(root,c5);root = addCustomer(root,c6);
+	Customer root = Read_from_file("D:\\treecustomer.dat");
+	//Save_to_file(root,"treecustomer.dat");
+	System.out.println("Danh sach khach hang theo cau truc cay BST theo ID:");
+	System.out.printf("%-10s%-25s%-10s%-10s","ID","Name","Gender","Age");
+	readtree(root);
+	System.out.println();
+	System.out.println("Danh sach khach hang nam la: ");
+	System.out.printf("%-10s%-25s%-10s%-10s","ID","Name","Gender","Age");
+	//getMaleList(root);
+	malelist = Read_from_file_arraylist("D:\\malelist.dat");
+	for (Customer c:malelist) {
+		System.out.println();
+		System.out.printf("%-10d%-25s%-10s%-10d",c.getCustomer_ID(),c.getCustomer_Name(),c.getCustomer_Gender(),c.getCustomer_Age());
+	}
+	System.out.println();
+	System.out.println("Danh sach khach hang nam sap xep theo ten: ");
+	malelist.sort(new NameComparator());
+	for (Customer c:malelist) {
+		System.out.println();
+		System.out.printf("%-10d%-25s%-10s%-10d",c.getCustomer_ID(),c.getCustomer_Name(),c.getCustomer_Gender(),c.getCustomer_Age());
+	}
+	Save_to_file_arraylist(malelist,"D:\\malelist.dat");
+	Save_to_file(root,"D:\\treecustomer.dat");
+	}
+	
+
+}
