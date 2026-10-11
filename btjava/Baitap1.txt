@@ -1,0 +1,47 @@
+Bài 1: Viết chương trình nhập vào 3 số a, b, c. Xuất ra giá trị lớn nhất, giá trị nhỏ nhất.
+Bài 2: Viết chương trình Java xuất ra màn hình 10 dòng:
+*
+**
+***
+****
+*****
+******
+*******
+********
+*********
+**********
+Bài 3: Viết chương trình Java xuất ra màn hình 10 dòng:
+* * * * * * * * * *
+  * * * * * * * * *
+    * * * * * * * *
+      * * * * * * *
+        * * * * * *
+          * * * * * 
+            * * * *
+              * * *
+                * *
+                  *
+Bài 4: Viết chương trình Java xuất ra màn hình 10 dòng:
+* * * * * * * * * *
+*                 *
+*                 *
+*                 *
+*                 *
+*                 *
+*                 *
+*                 *
+*                 *
+* * * * * * * * * *
+Bài 5: Viết chương trình xuất ra màn hình 10 dòng:
+*  *  *  *  *  *  *  *  * * 
+* *                    *  *
+*    *              *     *
+*       *        *        *
+*          *  *           *
+*          *  *           *
+*        *     *          *
+*      *         *        *
+*   *               *     *
+* *                   *   *
+*  *  *  *  *  *  *  * *  * 
+

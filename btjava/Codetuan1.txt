@@ -1,0 +1,66 @@
+Bài 1: Viết chương trình nhập vào 3 số a, b, c. Xuất ra giá trị lớn nhất, giá trị nhỏ nhất.
+
+Bài 2: Viết chương trình Java xuất ra màn hình 10 dòng:
+                                                       
+public class bt2 {
+public static void main(String[] args) {
+   for (int i = 1; i <= 10; i ++) {
+	   for(int j = 1; j <= i; j ++)
+		   System.out.print("*");
+	   System.out.println();
+	  }
+   }
+}
+
+Bài 3: Viết chương trình Java xuất ra màn hình 10 dòng:
+
+public class bt3 {
+public static void main(String[] args) {
+for (int i = 1; i <= 10; i ++) {
+	for (int j = 1; j <= i-1; j ++) System.out.print(" ");
+	for (int j = 1; j <=11-i; j ++) System.out.print("*");
+	System.out.println();
+	}
+}
+}
+
+Bài 4: Viết chương trình Java xuất ra màn hình 10 dòng:
+
+public class bt4 {
+public static void main(String[] args) {
+    for(int i = 1; i <=8; i ++) {
+		for(int j = 1; j <=10; j ++) {
+		    if(i ==1 || j ==1 || i==8 || j ==10) {
+		   	    System.out.print("*");
+		   	}
+		   	else {
+		   		System.out.print(" ");
+		   	}
+		 
+		}
+	    System.out.println();
+	}
+}
+}
+Bài 5: Viết chương trình Java xuất ra màn hình 10 dòng:
+
+public class bt5 {
+public static void main(String[] args) {
+    for(int i = 1; i <=8; i ++) {
+		for(int j = 1; j <=10; j ++) {
+		    if(i ==1 || j ==1 || i==10 || j ==10||i==j||i+j==11) {
+		   	    System.out.print("*");
+		   	}
+		   	else {
+		   		System.out.print(" ");
+		   	}
+		 
+		}
+	    System.out.println();
+	}
+}
+}
+
+
+
+

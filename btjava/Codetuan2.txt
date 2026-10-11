@@ -1,0 +1,115 @@
+Bài 6: Viết chương trình nhập vào n số nguyên. Xuất ra màn hình giá trị lớn nhất, giá trị nhỏ nhất, giá trị trung bình n số nguyên đó.
+
+Bài 7: Viết chương trình nhập vào n số nguyên. Xuất ra màn hình dãy số theo thứ tự tăng dần, theo thứ tự giảm dần và dãy số đã nhập.
+import java.util.Scanner;
+
+public class Baitap67 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int n;
+		Scanner nhap = new Scanner(System.in);
+		System.out.print("Nhap vao so phan tu: ");
+		n=nhap.nextInt();
+		int dayso[]=new int[n];
+		for (int i=0;i<n;i++) {
+			System.out.print("Nhap phan tu thu "+(i+1)+":");
+			dayso[i] = nhap.nextInt();
+		}
+		System.out.println("Day so vua nhap vao la:");
+		for (int i=0;i<n;i++) System.out.print(dayso[i]+" ");
+	int max=dayso[0];
+	int min=dayso[0];
+	int Sum=dayso[0];
+	for (int i=1;i<n;i++) {
+		if (dayso[i]>max) max = dayso[i];
+		if (dayso[i]<min) min = dayso[i];
+		Sum = Sum + dayso[i];
+	}
+	System.out.println();
+	System.out.println("Max = "+max+" Min = "+min+" Average = "+Sum*1.0/n);
+	System.out.println("Day so sau khi sap xep tang dan:");
+	for (int i=0;i<n-1;i++) {
+		for (int j=i+1;j<n;j++) {
+			if (dayso[i]>dayso[j]) {
+				int temp = dayso[i];
+				dayso[i] = dayso[j];
+				dayso[j] = temp;
+			}
+		}
+	}
+	for (int i=0;i<n;i++) System.out.print(dayso[i]+" ");
+	nhap.close();
+	}
+
+}
+Bài 8: Viết chương trình nhập xuất ra màn hình dãy số Fibonachi F(n)=F(n-1)+F(n-2). F(0)=1;F(1)=1.
+1 1 2 3 5 8 13 21 34...
+public class bai8 {
+	public static int fibo(int n) {
+		if (n==0) return 1;
+		if (n==1) return 1;
+		return fibo(n-1)+fibo(n-2);
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		for (int i=0;i<20;i++) System.out.print(fibo(i)+" ");
+	}
+
+}
+Bài 9: Viết chương trình xuất ra màn hình các chuỗi nhị phân n bít.
+public class Xuatnhiphan {
+	static int nhiphan[] = new int[4];
+	public static void xuat(int n) {
+		if (n==4) {
+			for (int i=0;i<4;i++) System.out.print(nhiphan[i]);
+			System.out.println();
+		}
+		else {
+		nhiphan[n]=0;
+		xuat(n+1);
+		nhiphan[n]=1;
+		xuat(n+1);
+		}
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		xuat(0);
+	}
+
+}
+
+Bài 10: Viết chương trình liệt kê các phần tử xuất hiện trong mảng.
+*/<input type="file" id="file" name="file[]" multiple />*
+    
+
+ 
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

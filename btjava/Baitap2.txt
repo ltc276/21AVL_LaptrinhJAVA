@@ -1,0 +1,12 @@
+Bài 6: Viết chương trình nhập vào n số nguyên. Xuất ra màn hình giá trị lớn nhất, giá trị nhỏ nhất, giá trị trung bình n số nguyên đó, đếm số lượng lớn hơn trung bình, nhỏ hơn trung bình .
+
+Bài 7: Viết chương trình nhập vào n số nguyên. Xuất ra màn hình dãy số theo thứ tự tăng dần, theo thứ tự giảm dần và dãy số đã nhập.
+
+Bài 8: Viết chương trình nhập xuất ra màn hình dãy số Fibonachi F(n)=F(n-1)+F(n-2). F(0)=1;F(1)=1.
+1 1 2 3 5 8 13 21 34...
+
+Bài 9: Viết chương trình xuất ra màn hình các chuỗi nhị phân n bít.
+
+Bài 10: Viết chương trình liệt kê các phần tử xuất hiện trong mảng.
+
+Bài 11: Viết chương trình tìm kiếm, thêm, xoá 1 phần tử vào 1 mảng đã sắp xếp.
