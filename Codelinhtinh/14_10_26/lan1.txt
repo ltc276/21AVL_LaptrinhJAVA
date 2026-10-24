@@ -1,0 +1,91 @@
+package javaai;
+
+public class FindPathv1 {
+	static int[][] matrix = new int[10][10];
+	public static void initial() {
+		for (int i=0;i<10;i++)
+			for (int j=0;j<10;j++) matrix[i][j] = 0;
+		matrix[0][0] = 5;
+		matrix[9][9] = 10;
+		for (int i=2;i<=7;i++) matrix[i][6] = 1;
+		for (int j=2;j<8;j++) matrix[5][j]=1;
+		
+	}
+	public static void output() {
+		for (int i=0;i<10;i++) {
+			for (int j=0;j<10;j++) {
+				if (matrix[i][j]==5) System.out.print(" S ");
+				if (matrix[i][j]==10) System.out.print(" F ");
+				if (matrix[i][j]==0) System.out.print(" - ");
+				if (matrix[i][j]==1) System.out.print(" X ");
+				if (matrix[i][j]==2) System.out.print(" o ");
+			}
+			
+			System.out.println();
+		}
+		matrix[9][9]=0;
+	}
+	public static double distance(int x,int y) {
+		return Math.sqrt((x-9)*(x-9)+(y-9)*(y-9));
+	}
+	public static void findpathv1(int i,int j) {
+		if (i==9&&j==9) {
+			System.out.println("Findpath sucessfully!!!");
+			matrix[0][0]=5;
+			matrix[9][9]=10;
+			output();
+		}
+		else {
+			matrix[i][j]=2;
+			double d = distance(i,j);
+			int t=0;
+			if (i-1>=0) if (matrix[i-1][j]==0) {
+				if (distance(i-1,j)<d) {
+					d = distance(i-1,j);
+					t=1;
+				}
+			}
+			if (i+1<10) if (matrix[i+1][j]==0) {
+				if (distance(i+1,j)<d) {
+					d = distance(i+1,j);
+					t=3;
+				}
+			}
+			if (j+1<10) if (matrix[i][j+1]==0) {
+				if (distance(i,j+1)<d) {
+					d = distance(i,j+1);
+					t=2;
+				}
+			}
+			if (j-1>=0) if (matrix[i][j-1]==0) {
+				if (distance(i,j-1)<d) {
+					d = distance(i,j-1);
+					t=4;
+				}
+			}
+			if (t==0) {
+				
+				
+					System.out.println("Bi mac ket!!!");
+					matrix[0][0]=5;
+					matrix[9][9]=10;
+					output();
+				}
+				
+			
+			if (t==1) findpathv1(i-1,j);
+			if (t==2) findpathv1(i,j+1);
+			if (t==3) findpathv1(i+1,j);
+			if (t==4) findpathv1(i,j-1);
+		}
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		initial();
+		output();
+		
+		findpathv1(0,0);
+		
+	}
+
+}

@@ -1,0 +1,109 @@
+package javaAI;
+
+public class Findpathv1 {
+	static int matrix[][] = new int[10][10];
+	static int Sx = 0,Sy = 0,Fx = 9,Fy = 9;
+	public static void initial() {
+		for (int i=0;i<10;i++)
+			for (int j=0;j<10;j++) matrix[i][j]=0;
+		for (int i=0;i<8;i++) matrix[i][6]=1;
+		for (int j=4;j<8;j++) matrix[5][j]=1;
+	}
+	public static void output() {
+		for (int i=0;i<10;i++) {
+			for (int j=0;j<10;j++) {
+				if (matrix[i][j]==0) System.out.print(" - ");
+				if (matrix[i][j]==1) System.out.print(" X ");
+				if (matrix[i][j]==5) System.out.print(" S ");
+				if (matrix[i][j]==10) System.out.print(" F ");
+				if (matrix[i][j]==2) System.out.print(" o ");
+				
+			}
+			System.out.println();
+	}
+	}
+	public static double distance(int i,int j) {
+		return Math.sqrt((i-Fx)*(i-Fx)+(j-Fy)*(j-Fy));
+	}
+	public static void findpathv1(int i,int j) {
+		if ((i==Fx)&&(j==Fy)) {
+			System.out.println("Findpathv1 successfully!!!");
+			matrix[Sx][Sy]=5;
+			matrix[Fx][Fy]=10;
+			output();
+		}
+		else {
+			matrix[i][j]=2;
+			output();System.out.println();
+			int t=0;
+			double d = distance(i,j);
+			if (i-1>=0) if (matrix[i-1][j]==0) if (distance(i-1,j)<=d) {
+				t = 1;
+				d = distance(i-1,j);
+			}
+			if (i+1<10) if (matrix[i+1][j]==0) if (distance(i+1,j)<=d) {
+				t = 3;
+				d = distance(i+1,j);
+			}
+			if (j+1<10) if (matrix[i][j+1]==0) if (distance(i,j+1)<=d) {
+				t = 2;
+				d = distance(i,j+1);
+			}
+			if (j-1>=0) if (matrix[i][j-1]==0) if (distance(i,j-1)<=d) {
+				t = 4;
+				d = distance(i,j-1);
+			}
+			if (t==0) {
+				System.out.println("Tim kiem dung do khong co O tiep theo tot hon!");
+				output();
+				if (i-1>=0) if (matrix[i-1][j]==0) {
+					t = 1;
+					d = distance(i-1,j);	
+				}
+				if (i+1<10) if (matrix[i+1][j]==0) {
+					if (t==0) {
+						t = 3;
+						d = distance(i+1,j);
+					}
+					else if (distance(i+1,j)<=d) t=3;
+				}
+				if (j+1<10) if (matrix[i][j+1]==0) {
+					if (t==0) {
+						t = 2;
+						d = distance(i,j+1);
+					}
+					else if (distance(i,j+1)<=d) t=2;
+					
+				}
+				if (j-1>=0) if (matrix[i][j-1]==0) {
+					if (t==0) {
+						t = 4;
+						//d = distance(i,j-1);
+					}
+					else if (distance(i,j-1)<=d) t=4;
+				}
+				if (t==0) System.out.println("Findpathv1 falure!!!");
+				else {
+					if (t==1) findpathv1(i-1,j);
+					if (t==2) findpathv1(i,j+1);
+					if (t==3) findpathv1(i+1,j);
+					if (t==4) findpathv1(i,j-1);
+					t=0;
+				}
+				
+			}
+			if (t==1) findpathv1(i-1,j);
+			if (t==2) findpathv1(i,j+1);
+			if (t==3) findpathv1(i+1,j);
+			if (t==4) findpathv1(i,j-1);
+			
+		}
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		initial();
+		findpathv1(Sx,Sy);
+		
+	}
+
+}
